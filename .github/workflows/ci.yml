@@ -9,18 +9,17 @@ on:
     branches: [ "master"]
     paths-ignore: [ "docs/**" ]
 
-  # push:
-  #   branches: [ "master"]
-  #   paths-ignore: [ "docs/**" ]
-
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
   linter:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, anton]
     steps:
+
+      - name: Add Permissions
+        run: echo ${{secrets.ANTON_PASSWORD}} | sudo -S chown -R $USER:$USER /home/anton/runner1/_work
 
       - name: Checkout Code Repository
         uses: actions/checkout@v3
@@ -28,7 +27,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: "3.10"
+          python-version: "3.8"
           cache: pip
           cache-dependency-path: |
             requirements/base.txt
@@ -38,9 +37,12 @@ jobs:
         uses: pre-commit/action@v2.0.3
 
   pytest:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, omen]
 
     steps:
+
+      - name: Change _work Permissions
+        run: echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R flemmer:flemmer ../../
 
       - name: Checkout Code Repository
         uses: actions/checkout@v3
