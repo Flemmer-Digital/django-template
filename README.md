@@ -12,6 +12,11 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 `docker-compose -f local.yml run --rm django python manage.py migrate`
 
+
+### Running Unit Tests
+
+`docker-compose -f local.yml run django pytest`
+
 ### Adding Python Packages
 
 `. venv/bin/activate` - activate virtual env
