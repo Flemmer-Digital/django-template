@@ -14,7 +14,13 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 ### Adding Python Packages
 
-`docker-compose -f local.yml run django pip3 install <python-package>`
+`. venv/bin/activate` - activate virtual env
+`pip install <package-name>` - install the package
+`pip freeze > requirements.txt` - update requirements.txt
+`pip install -r requirements.txt` - check the install works
+
+
+Then rebuild the docker image
 
 ### Setting Up Your Users
 

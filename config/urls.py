@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 from graphene_django.views import GraphQLView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from api.django_app.views.generate_graphql_schema import generate_graphql_schema
+
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
@@ -51,6 +53,7 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
+        path("graphql-schema", generate_graphql_schema),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar

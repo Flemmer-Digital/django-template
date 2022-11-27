@@ -1,5 +1,5 @@
 import graphene
 
-from .types import Query
+from .types.query_type import Query
 
 schema = graphene.Schema(query=Query)
