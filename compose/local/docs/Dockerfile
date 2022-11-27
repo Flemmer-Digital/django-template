@@ -19,12 +19,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./requirements /requirements
+COPY ./requirements.txt /requirements.txt
 
 # create python dependency wheels
-RUN pip wheel --no-cache-dir --wheel-dir /usr/src/app/wheels  \
-  -r /requirements/local.txt -r /requirements/production.txt \
-  && rm -rf /requirements
+RUN pip wheel --no-cache-dir --wheel-dir /usr/src/app/wheels -r /requirements.txt
 
 
 # Python 'run' stage

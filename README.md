@@ -12,6 +12,21 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
 `docker-compose -f local.yml run --rm django python manage.py migrate`
 
+
+### Running Unit Tests
+
+`docker-compose -f local.yml run django pytest`
+
+### Adding Python Packages
+
+`. venv/bin/activate` - activate virtual env
+`pip install <package-name>` - install the package
+`pip freeze > requirements.txt` - update requirements.txt
+`pip install -r requirements.txt` - check the install works
+
+
+Then rebuild the docker image
+
 ### Setting Up Your Users
 
 -   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
