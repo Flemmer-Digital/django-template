@@ -18,7 +18,7 @@ jobs:
     runs-on: [self-hosted, linux, anton]
     steps:
 
-      - name: Add Permissions
+      - name: Change Permissions
         run: echo ${{secrets.ANTON_PASSWORD}} | sudo -S chown -R $USER:$USER /home/anton/runner1/_work
 
       - name: Checkout Code Repository
@@ -36,12 +36,12 @@ jobs:
         uses: pre-commit/action@v2.0.3
 
   pytest:
-    runs-on: [self-hosted, linux, omen]
+    runs-on: [self-hosted, linux, anton]
 
     steps:
 
-      - name: Change _work Permissions
-        run: echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R flemmer:flemmer ../../
+      - name: Change Permissions
+        run: echo ${{secrets.ANTON_PASSWORD}} | sudo -S chown -R $USER:$USER /home/anton/runner1/_work
 
       - name: Checkout Code Repository
         uses: actions/checkout@v3
